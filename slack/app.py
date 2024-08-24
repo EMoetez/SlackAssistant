@@ -58,10 +58,6 @@ def verify_slack_request():
         signature=signature,
     )
 
-@flask_app.route("/slack/events", methods=["POST"])
-@require_slack_verification
-def slack_events():
-    return handler.handle(request)
 
 
 def get_bot_user_id():
@@ -116,6 +112,7 @@ def handle_mentions(body, say):
 
 
 @flask_app.route("/slack/events", methods=["POST"])
+@require_slack_verification
 def slack_events():
     """
     Route for handling Slack events.
